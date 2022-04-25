@@ -25,7 +25,6 @@ RUN flake8 --ignore=E501,F401 ./dj_battle_in_dnd
 # install dependencies
 COPY ./requirements.txt .
 RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels -r requirements.txt
-RUN pip install gunicorn
 
 #########
 # FINAL #
@@ -44,6 +43,7 @@ RUN addgroup -S app && adduser -S app -G app
 ENV HOME=/home/app
 ENV APP_HOME=/home/app/web
 RUN mkdir $APP_HOME
+RUN mkdir $APP_HOME/staticfiles
 WORKDIR $APP_HOME
 
 # install dependencies
